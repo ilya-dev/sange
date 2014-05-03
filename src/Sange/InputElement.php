@@ -29,5 +29,25 @@ abstract class InputElement {
         $this->value = $value;
     }
 
+    /**
+     * Get name of the input element.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Get value of the input element.
+     *
+     * @return string|null
+     */
+    public function getValue()
+    {
+        return $this->value;
+    }
+
 }
 
