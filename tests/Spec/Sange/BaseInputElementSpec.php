@@ -6,7 +6,7 @@ class BaseInputElementSpec extends ObjectBehavior {
 
     function let()
     {
-        $this->beConstructedWith('foo');
+        $this->beConstructedWith('foo', 'bar');
     }
 
     function it_is_initializable()
@@ -21,7 +21,7 @@ class BaseInputElementSpec extends ObjectBehavior {
 
     function it_returns_value_of_the_input_element()
     {
-        $this->getValue()->shouldBe(null);
+        $this->getValue()->shouldBe('bar');
     }
 
 }
