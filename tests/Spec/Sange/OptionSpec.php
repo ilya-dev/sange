@@ -14,5 +14,10 @@ class OptionSpec extends ObjectBehavior {
         $this->shouldHaveType('Sange\Option');
     }
 
+    function it_checks_if_the_element_was_used_a_switch()
+    {
+        $this->isFlag()->shouldBe(false);
+    }
+
 }
 
