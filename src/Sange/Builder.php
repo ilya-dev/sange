@@ -68,10 +68,9 @@ class Builder {
      */
     public function build()
     {
-        $arguments = $this->convertArguments();
-        $options   = $this->convertOptions();
-
-        return $this->command.$arguments.$options;
+        return $this->command
+              .$this->convertArguments()
+              .$this->convertOptions();
     }
 
     /**
