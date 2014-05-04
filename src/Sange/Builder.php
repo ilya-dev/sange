@@ -56,8 +56,9 @@ class Builder {
     public function build()
     {
         $arguments = $this->convertArguments();
+        $options   = $this->convertOptions();
 
-        return $this->command.$arguments;
+        return $this->command.$arguments.$options;
     }
 
     /**
@@ -75,6 +76,37 @@ class Builder {
         $arguments = implode(' ', array_map([$this, 'escapeValue'], $arguments));
 
         return $arguments ? (' '.$arguments) : '';
+    }
+
+    /**
+     * Convert all input elements of the type "Option" to a string.
+     *
+     * @return string
+     */
+    protected function convertOptions()
+    {
+        $options = array_filter($this->elements, function(InputElement $element)
+        {
+            return ($element instanceof Option);
+        });
+
+        $result = [];
+
+        foreach ($options as $option)
+        {
+            $temporary = $option->isShort() ? '-' : '--';
+
+            $temporary .= $option->getName();
+
+            if ( ! $option->isFlag())
+            {
+                $temporary .= ' '.escapeshellarg($option->getValue());
+            }
+
+            $result[] = $temporary;
+        }
+
+        return ($result = implode(' ', $result)) ? (' '.$result) : '';
     }
 
     /**

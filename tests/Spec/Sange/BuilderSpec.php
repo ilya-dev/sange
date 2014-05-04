@@ -33,6 +33,14 @@ class BuilderSpec extends ObjectBehavior {
         $this->add(new Argument(null, 'baz'));
 
         $this->build()->shouldBe("foo 'bar' 'baz'");
+
+        $this->add(new Option('text', 'wow'));
+        $this->add(new Option('no-backup'));
+        $this->add(new Option('n', 10));
+
+        $this->build()->shouldBe(
+            "foo 'bar' 'baz' --text 'wow' --no-backup -n '10'"
+        );
     }
 
 }
