@@ -15,14 +15,16 @@ class BuilderSpec extends ObjectBehavior {
         $this->shouldHaveType('Sange\Builder');
     }
 
-    function it_adds_an_input_element(Argument $argument, Option $option)
+    function it_adds_an_input_element()
     {
         $this->getElements()->shouldHaveCount(0);
 
-        $this->add($argument);
-        $this->add($option);
+        $this->add(new Argument);
+        $this->add(new Option);
 
         $this->getElements()->shouldHaveCount(2);
+        $this->getElements('Argument')->shouldHaveCount(1);
+        $this->getElements('Option')->shouldHaveCount(1);
     }
 
     function it_builds_a_command()

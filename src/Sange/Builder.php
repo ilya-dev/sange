@@ -53,6 +53,8 @@ class Builder {
             return $elements;
         }
 
+        $type = 'Sange\\'.$type;
+
         return array_filter($elements, function(InputElement $element) use($type)
         {
             return ($element instanceof $type);
