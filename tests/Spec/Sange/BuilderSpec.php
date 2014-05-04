@@ -17,8 +17,12 @@ class BuilderSpec extends ObjectBehavior {
 
     function it_adds_an_input_element(Argument $argument, Option $option)
     {
+        $this->getElements()->shouldHaveCount(0);
+
         $this->add($argument);
         $this->add($option);
+
+        $this->getElements()->shouldHaveCount(2);
     }
 
     function it_builds_a_command()

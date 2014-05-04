@@ -28,7 +28,7 @@ class Builder {
     }
 
     /**
-     * Add an element.
+     * Add an input element.
      *
      * @param InputElement $element
      * @return void
@@ -36,6 +36,16 @@ class Builder {
     public function add(InputElement $element)
     {
         $this->elements[] = $element;
+    }
+
+    /**
+     * Get all input elements.
+     *
+     * @return array
+     */
+    public function getElements()
+    {
+        return $this->elements;
     }
 
     /**
