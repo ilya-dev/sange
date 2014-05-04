@@ -30,10 +30,10 @@ class Builder {
     /**
      * Add an element.
      *
-     * @param Input $element
+     * @param InputElement $element
      * @return void
      */
-    public function add(Input $element)
+    public function add(InputElement $element)
     {
         $this->elements[] = $element;
     }
