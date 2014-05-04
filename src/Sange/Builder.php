@@ -84,7 +84,7 @@ class Builder {
 
         $arguments = implode(' ', array_map([$this, 'escapeValue'], $arguments));
 
-        return $arguments ? (' '.$arguments) : '';
+        return $arguments ? ' '.$arguments : '';
     }
 
     /**
@@ -112,7 +112,7 @@ class Builder {
             $result[] = $temporary;
         }
 
-        return ($result = implode(' ', $result)) ? (' '.$result) : '';
+        return $result ? ' '.implode(' ', $result) : '';
     }
 
     /**
