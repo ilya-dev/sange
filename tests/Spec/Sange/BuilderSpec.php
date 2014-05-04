@@ -21,5 +21,10 @@ class BuilderSpec extends ObjectBehavior {
         $this->add($option);
     }
 
+    function it_builds_a_command()
+    {
+        $this->build()->shouldBe('foo');
+    }
+
 }
 

@@ -46,7 +46,7 @@ class Builder {
      */
     public function build()
     {
-
+        return $this->command;
     }
 
 }
