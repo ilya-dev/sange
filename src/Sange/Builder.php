@@ -41,11 +41,22 @@ class Builder {
     /**
      * Get all input elements.
      *
+     * @param string|null $type
      * @return array
      */
-    public function getElements()
+    public function getElements($type = null)
     {
-        return $this->elements;
+        $elements = $this->elements;
+
+        if (is_null($type))
+        {
+            return $elements;
+        }
+
+        return array_filter($elements, function(InputElement $element) use($type)
+        {
+            return ($element instanceof $type);
+        });
     }
 
     /**
@@ -68,10 +79,7 @@ class Builder {
      */
     protected function convertArguments()
     {
-        $arguments = array_filter($this->elements, function(InputElement $element)
-        {
-            return ($element instanceof Argument);
-        });
+        $arguments = $this->getElements('Argument');
 
         $arguments = implode(' ', array_map([$this, 'escapeValue'], $arguments));
 
@@ -85,10 +93,7 @@ class Builder {
      */
     protected function convertOptions()
     {
-        $options = array_filter($this->elements, function(InputElement $element)
-        {
-            return ($element instanceof Option);
-        });
+        $options = $this->getElements('Option');
 
         $result = [];
 
