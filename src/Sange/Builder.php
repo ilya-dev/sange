@@ -38,5 +38,16 @@ class Builder {
         $this->elements[] = $element;
     }
 
+    /**
+     * Build a new command based on the given elements.
+     *
+     *
+     * @return string
+     */
+    public function build()
+    {
+
+    }
+
 }
 
