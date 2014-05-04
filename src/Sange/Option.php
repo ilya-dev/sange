@@ -12,5 +12,15 @@ class Option extends InputElement {
         return is_null($this->value);
     }
 
+    /**
+     * Determine whether the element name is exactly one character long.
+     *
+     * @return boolean
+     */
+    public function isShort()
+    {
+        return 1 == mb_strlen($this->name, mb_detect_encoding($this->name));
+    }
+
 }
 

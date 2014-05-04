@@ -19,5 +19,10 @@ class OptionSpec extends ObjectBehavior {
         $this->isFlag()->shouldBe(false);
     }
 
+    function it_checks_if_the_element_is_one_character_long()
+    {
+        $this->isShort()->shouldBe(false);
+    }
+
 }
 
