@@ -24,6 +24,11 @@ class BuilderSpec extends ObjectBehavior {
     function it_builds_a_command()
     {
         $this->build()->shouldBe('foo');
+
+        $this->add(new Argument(null, 'bar'));
+        $this->add(new Argument(null, 'baz'));
+
+        $this->build()->shouldBe('foo "bar" "baz"');
     }
 
 }

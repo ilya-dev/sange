@@ -46,7 +46,24 @@ class Builder {
      */
     public function build()
     {
-        return $this->command;
+        $arguments = $this->convertArguments();
+
+        return sprintf('%s %s', $this->command, $arguments);
+    }
+
+    /**
+     * Convert all input elements of the type "Argument" to a string.
+     *
+     * @return string
+     */
+    protected function convertArguments()
+    {
+        $arguments = array_filter($this->elements, function(InputElement $element)
+        {
+            return ($element instanceof Argument);
+        });
+
+        return implode(' ', array_map('escapeshellarg', $arguments));
     }
 
 }
