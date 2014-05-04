@@ -51,14 +51,13 @@ class Builder {
     /**
      * Build a new command based on the given elements.
      *
-     *
      * @return string
      */
     public function build()
     {
         $arguments = $this->convertArguments();
 
-        return sprintf('%s %s', $this->command, $arguments);
+        return $this->command.$arguments;
     }
 
     /**
@@ -73,7 +72,19 @@ class Builder {
             return ($element instanceof Argument);
         });
 
-        return implode(' ', array_map('escapeshellarg', $arguments));
+        $arguments = implode(' ', array_map([$this, 'escapeValue'], $arguments));
+
+        return $arguments ? (' '.$arguments) : '';
+    }
+
+    /**
+     * Escape the element's value using escapeshellarg.
+     *
+     * @return string
+     */
+    protected function escapeValue(InputElement $element)
+    {
+        return escapeshellarg($element->getValue());
     }
 
 }

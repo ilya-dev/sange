@@ -32,7 +32,8 @@ class BuilderSpec extends ObjectBehavior {
         $this->add(new Argument(null, 'bar'));
         $this->add(new Argument(null, 'baz'));
 
-        $this->build()->shouldBe('foo "bar" "baz"');
+        $this->getElements()->shouldHaveCount(2);
+        $this->build()->shouldBe("foo 'bar' 'baz'");
     }
 
 }
