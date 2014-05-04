@@ -5,7 +5,7 @@ abstract class InputElement {
     /**
      * Name of the input element.
      *
-     * @var string
+     * @var string|null
      */
     protected $name;
 
@@ -19,11 +19,11 @@ abstract class InputElement {
     /**
      * The constructor.
      *
-     * @param string $name
+     * @param string|null $name
      * @param string|null $value
      * @return Input
      */
-    public function __construct($name, $value = null)
+    public function __construct($name = null, $value = null)
     {
         $this->name  = $name;
         $this->value = $value;
@@ -32,7 +32,7 @@ abstract class InputElement {
     /**
      * Get name of the input element.
      *
-     * @return string
+     * @return string|null
      */
     public function getName()
     {
