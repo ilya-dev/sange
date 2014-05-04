@@ -10,6 +10,13 @@ class Builder {
     protected $command;
 
     /**
+     * The input elements.
+     *
+     * @var array
+     */
+    protected $elements = [];
+
+    /**
      * The constructor.
      *
      * @param string $command
@@ -18,6 +25,17 @@ class Builder {
     public function __construct($command)
     {
         $this->command = $command;
+    }
+
+    /**
+     * Add an element.
+     *
+     * @param Input $element
+     * @return void
+     */
+    public function add(Input $element)
+    {
+        $this->elements[] = $element;
     }
 
 }
