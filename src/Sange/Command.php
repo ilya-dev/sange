@@ -28,6 +28,16 @@ class Command {
     }
 
     /**
+     * Get the command name.
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->command;
+    }
+
+    /**
      * Add an input element.
      *
      * @param InputElement $element

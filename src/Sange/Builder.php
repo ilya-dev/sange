@@ -27,7 +27,7 @@ class Builder {
      */
     public function build()
     {
-        return $this->command
+        return $this->command->getName()
               .$this->convertArguments()
               .$this->convertOptions();
     }
