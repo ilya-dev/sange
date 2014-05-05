@@ -32,7 +32,7 @@ class Parser {
      */
     protected function convertChunk($chunk, array $chunks)
     {
-        if (strpos($chunk, '-') === false)
+        if ($this->isArgument($chunk))
         {
             return new Argument(null, $this->cleanChunk($chunk));
         }
@@ -50,6 +50,17 @@ class Parser {
     protected function cleanChunk($chunk)
     {
         return str_replace(['\'', "\""], '', $chunk);
+    }
+
+    /**
+     * Determine whether a string is a valid argument declaration.
+     *
+     * @param string $string
+     * @return boolean
+     */
+    protected function isArgument($string)
+    {
+        return strpos($string, '-') === false;
     }
 
 }
