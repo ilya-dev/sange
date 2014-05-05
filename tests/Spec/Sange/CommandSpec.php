@@ -15,6 +15,11 @@ class CommandSpec extends ObjectBehavior {
         $this->shouldHaveType('Sange\Command');
     }
 
+    function it_returns_the_command_name()
+    {
+        $this->getName()->shouldBe('foo');
+    }
+
     function it_adds_an_input_element()
     {
         $this->getElements()->shouldHaveCount(0);
