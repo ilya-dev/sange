@@ -37,19 +37,29 @@ class Parser {
             return new Argument(null, $this->cleanChunk($chunk));
         }
 
-        // $index = array_search($chunk, $chunks) + 1;
-        return new Option($chunk);
+        $index = array_search($chunk, $chunks) + 1;
+        $value = null;
+
+        if (isset ($chunks[$index]) and $this->isArgument($chunks[$index]))
+        {
+            $value = $this->cleanChunk($chunks[$index]);
+        }
+
+        return new Option($this->cleanChunk($chunk), $value);
     }
 
     /**
      * Remove all quotes in a string (undo shellescapearg).
+     * This method will also remove all "-" characters.
      *
      * @param string $chunk
      * @return string
      */
     protected function cleanChunk($chunk)
     {
-        return str_replace(['\'', "\""], '', $chunk);
+        $chunk = str_replace(['\'', "\""], '', $chunk);
+
+        return preg_replace('/^(\-+)/', '', $chunk, 1);
     }
 
     /**
