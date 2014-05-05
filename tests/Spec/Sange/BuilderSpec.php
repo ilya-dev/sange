@@ -17,16 +17,24 @@ class BuilderSpec extends ObjectBehavior {
 
     function it_builds_a_command(Command $command)
     {
+        $command->getName()->willReturn('foo');
+        $command->getElements('Option')->willReturn([]);
+        $command->getElements('Argument')->willReturn([]);
+
         $this->build()->shouldBe('foo');
 
-        $command->add(new Argument(null, 'bar'));
-        $command->add(new Argument(null, 'baz'));
+        $command->getElements('Argument')->willReturn([
+            new Argument(null, 'bar'),
+            new Argument(null, 'baz'),
+        ]);
 
         $this->build()->shouldBe("foo 'bar' 'baz'");
 
-        $command->add(new Option('text', 'wow'));
-        $command->add(new Option('no-backup'));
-        $command->add(new Option('n', 10));
+        $command->getElements('Option')->willReturn([
+            new Option('text', 'wow'),
+            new Option('no-backup'),
+            new Option('n', 10),
+        ]);
 
         $this->build()->shouldBe(
             "foo 'bar' 'baz' --text 'wow' --no-backup -n '10'"
