@@ -10,7 +10,7 @@ class Parser {
      */
     public function parse($string)
     {
-
+        return new Command($string);
     }
 
 }
