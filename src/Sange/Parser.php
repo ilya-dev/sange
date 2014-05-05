@@ -15,7 +15,10 @@ class Parser {
 
         $command = new Command(array_shift($chunks));
 
-        array_map([$command, 'add'], array_map([$this, 'convertChunk'], $chunks));
+        foreach ($chunks as $chunk)
+        {
+            $command->add($this->convertChunk($chunk, $chunks));
+        }
 
         return $command;
     }
@@ -24,11 +27,18 @@ class Parser {
      * Convert a chunk to InputElement instance.
      *
      * @param string $chunk
+     * @param array $chunks
      * @return InputElement
      */
-    protected function convertChunk($chunk)
+    protected function convertChunk($chunk, array $chunks)
     {
-        return new Argument(null, $this->cleanChunk($chunk));
+        if (strpos($chunk, '-') === false)
+        {
+            return new Argument(null, $this->cleanChunk($chunk));
+        }
+
+        // $index = array_search($chunk, $chunks) + 1;
+        return new Option($chunk);
     }
 
     /**

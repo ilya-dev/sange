@@ -18,6 +18,13 @@ class ParserSpec extends ObjectBehavior {
         $command->add(new Argument(null, 'baz'));
 
         $this->parse("foo 'bar' 'baz'")->shouldBeLike($command);
+
+        $command->add(new Option('text', 'wow'));
+        $command->add(new Option('no-backup'));
+        $command->add(new Option('f'));
+
+        $this->parse(" foo  'bar'  'baz' --text  'wow' --no-backup  -f ")
+             ->shouldBeLike($command);
     }
 
 }
