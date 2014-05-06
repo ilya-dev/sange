@@ -45,14 +45,12 @@ class Parser {
 
         $value = null;
 
-        if ($next = next($this->chunks) and $this->isArgument($next))
+        if (($next = reset($this->chunks)) and $this->isArgument($next))
         {
             $value = $this->cleanChunk($next);
 
             array_shift($this->chunks);
         }
-
-        reset($this->chunks);
 
         return new Option($this->cleanChunk($chunk), $value);
     }
