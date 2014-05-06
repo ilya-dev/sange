@@ -30,7 +30,7 @@ class ParserSpec extends ObjectBehavior {
 
         $command->add(new Option('n', '10'));
 
-        $this->parse('foo -n10')->shouldBeLike($command);
+        $this->parse('foo -n10 -abc')->shouldBeLike($command);
     }
 
 }
