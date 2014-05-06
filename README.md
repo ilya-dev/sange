@@ -2,9 +2,16 @@
 
 Build, parse and optimize console commands.
 
-## Eh..release date?
+## Development
 
-Hopefully, 7th of May. 
+### Parser
+
+Difficult examples:
+
+```shell
+foo bar "baz" "wow" --number 123 --text=hello
+foo -abc -n10 -vvv
+```
 
 ## There will be some documentation available, right?
 
