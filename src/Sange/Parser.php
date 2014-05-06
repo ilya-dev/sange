@@ -3,6 +3,13 @@
 class Parser {
 
     /**
+     * The chunks.
+     *
+     * @var array
+     */
+    protected $chunks = [];
+
+    /**
      * Parse a string into Command instance.
      *
      * @param string $string
@@ -10,14 +17,13 @@ class Parser {
      */
     public function parse($string)
     {
-        // split the string into chunks
-        $chunks = array_filter(array_map('trim', explode(' ', $string)));
+        $this->chunks = array_filter(array_map('trim', explode(' ', $string)));
 
-        $command = new Command(array_shift($chunks));
+        $command = new Command(array_shift($this->chunks));
 
-        foreach ($chunks as $chunk)
+        while ($this->chunks)
         {
-            $command->add($this->convertChunk($chunk, $chunks));
+            $command->add($this->convertChunk());
         }
 
         return $command;
@@ -26,24 +32,27 @@ class Parser {
     /**
      * Convert a chunk to InputElement instance.
      *
-     * @param string $chunk
-     * @param array $chunks
      * @return InputElement
      */
-    protected function convertChunk($chunk, array $chunks)
+    protected function convertChunk()
     {
+        $chunk = array_shift($this->chunks);
+
         if ($this->isArgument($chunk))
         {
             return new Argument(null, $this->cleanChunk($chunk));
         }
 
-        $index = array_search($chunk, $chunks) + 1;
         $value = null;
 
-        if (isset ($chunks[$index]) and $this->isArgument($chunks[$index]))
+        if ($next = next($this->chunks) and $this->isArgument($next))
         {
-            $value = $this->cleanChunk($chunks[$index]);
+            $value = $this->cleanChunk($next);
+
+            array_shift($this->chunks);
         }
+
+        reset($this->chunks);
 
         return new Option($this->cleanChunk($chunk), $value);
     }
