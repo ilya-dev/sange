@@ -20,7 +20,7 @@ class TransformerSpec extends ObjectBehavior {
 
     function it_discloses_combined_options()
     {
-        $this->transform('foo -abc')->shouldBe('foo -a -b -c');
+        $this->transform('foo -abc --bar')->shouldBe('foo -a -b -c --bar');
     }
 
 }
