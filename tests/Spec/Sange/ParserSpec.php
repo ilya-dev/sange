@@ -36,9 +36,9 @@ class ParserSpec extends ObjectBehavior {
         // TODO: 'foo -n10 -abc -vvv'
         $this->parse('foo -n10 -abc')->shouldBeLike($command);
 
-        // $command = new Command('foo');
-        // $command->add(new Option('bar', 'baz'));
-        // $this->parse('foo bar=baz')->shouldBeLike($command);
+        $command = new Command('foo');
+        $command->add(new Option('bar', 'baz'));
+        $this->parse('foo --bar="baz"')->shouldBeLike($command);
     }
 
 }
