@@ -23,4 +23,11 @@ class TransformerSpec extends ObjectBehavior {
         $this->transform('foo -abc --bar')->shouldBe('foo -a -b -c --bar');
     }
 
+    function it_adds_a_white_space_between_a_short_option_and_its_value()
+    {
+        $this->transform('foo -n10')->shouldBe('foo -n 10');
+
+        $this->transform('foo -abc10')->shouldBe('foo -a -b -c 10');
+    }
+
 }
