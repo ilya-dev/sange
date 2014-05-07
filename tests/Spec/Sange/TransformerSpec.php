@@ -18,4 +18,9 @@ class TransformerSpec extends ObjectBehavior {
         $this->transform('foo --param="--param=value"')->shouldBe('foo --param "--param=value"');
     }
 
+    function it_discloses_combined_options()
+    {
+        $this->transform('foo -abc')->shouldBe('foo -a -b -c');
+    }
+
 }

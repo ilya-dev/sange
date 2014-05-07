@@ -10,7 +10,36 @@ class Transformer {
      */
     public function transform($command)
     {
-        return preg_replace('/(\-\-\w+)\=([^\s]+)/', '$1 $2', $command);
+        $command = preg_replace('/(\-\-\w+)\=([^\s]+)/', '$1 $2', $command);
+
+        $callback = function(array $matches)
+        {
+            return $this->convertCombined(reset($matches));
+        };
+
+        $command = preg_replace_callback('/\s\-(\w+)/', $callback->bindTo($this), $command);
+
+        return $command;
+    }
+
+    /**
+     * Convert a "combined" option: transform "-abc" to "-a -b -c".
+     *
+     * @param string $option
+     * @return string
+     */
+    protected function convertCombined($option)
+    {
+        $option = trim(str_replace('-', '', $option));
+
+        $options = [];
+
+        foreach (str_split($option) as $each)
+        {
+            $options[] = '-'.$each;
+        }
+
+        return ' '.implode(' ', $options);
     }
 
 }
