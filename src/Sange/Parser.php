@@ -35,6 +35,8 @@ class Parser {
      */
     public function parse($string)
     {
+        $string = $this->transformer->transform($string);
+
         $this->chunks = array_filter(array_map('trim', explode(' ', $string)));
 
         $command = new Command(array_shift($this->chunks));
