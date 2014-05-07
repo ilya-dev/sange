@@ -17,7 +17,9 @@ class Transformer {
             return $this->convertCombined(reset($matches));
         };
 
-        $command = preg_replace_callback('/\s\-(\w+)/', $callback->bindTo($this), $command);
+        $command = preg_replace_callback('/\s\-([a-z]+)/i', $callback->bindTo($this), $command);
+
+        $command = preg_replace('/\s\-([a-z]+)([^a-z\s]+)/i', ' -$1 $2', $command);
 
         return $command;
     }
