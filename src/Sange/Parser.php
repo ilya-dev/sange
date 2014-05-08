@@ -52,22 +52,28 @@ class Parser {
         {
             $element = $this->convertChunk();
 
-            if (is_null($name = $element->getName()))
+            $id = spl_object_hash($element);
+
+            if ($element instanceof Argument)
             {
-                $name = $element->getValue();
+                $this->elements[$id] = $element;
+
+                continue;
             }
 
-            if (array_key_exists($name, $this->elements))
+            if (array_key_exists($id, $this->elements))
             {
-                $this->elements[$name]->increaseVolume();
+                $this->elements[$id]->increaseVolume();
             }
             else
             {
-                $this->elements[$name] = $element;
+                $this->elements[$id] = $element;
             }
         }
 
         array_map([$command, 'add'], $this->elements);
+
+        $this->elements = [];
 
         return $command;
     }
