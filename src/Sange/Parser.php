@@ -52,14 +52,9 @@ class Parser {
         {
             $element = $this->convertChunk();
 
-            $id = spl_object_hash($element);
-
-            if ($element instanceof Argument)
-            {
-                $this->elements[$id] = $element;
-
-                continue;
-            }
+            $id = ($element instanceof Argument) ?
+                                                    spl_object_hash($element)
+                                                 :  $element->getName();
 
             if (array_key_exists($id, $this->elements))
             {
