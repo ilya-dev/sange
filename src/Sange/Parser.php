@@ -17,6 +17,13 @@ class Parser {
     protected $transformer;
 
     /**
+     * The parsed elements.
+     *
+     * @var array
+     */
+    protected $elements = [];
+
+    /**
      * The constructor.
      *
      * @param Transformer|null $transformer
@@ -43,8 +50,26 @@ class Parser {
 
         while ($this->chunks)
         {
-            $command->add($this->convertChunk());
+            $element = $this->convertChunk();
+
+            if ( ! is_null($element->getName()))
+            {
+                if (array_key_exists($element->getName(), $this->elements))
+                {
+                    //$this->elements[$element->getName()]->increaseVolume();
+                }
+                else
+                {
+                    $this->elements[] = $element;
+                }
+            }
+            else
+            {
+                $this->elements[] = $element;
+            }
         }
+
+        array_map([$command, 'add'], $this->elements);
 
         return $command;
     }
