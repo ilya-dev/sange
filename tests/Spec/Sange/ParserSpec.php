@@ -33,12 +33,18 @@ class ParserSpec extends ObjectBehavior {
         $command->add(new Option('b'));
         $command->add(new Option('c'));
 
-        // TODO: 'foo -n10 -abc -vvv'
         $this->parse('foo -n10 -abc')->shouldBeLike($command);
 
         $command = new Command('foo');
         $command->add(new Option('bar', 'baz'));
         $this->parse('foo --bar="baz"')->shouldBeLike($command);
+
+        $command = new Command('foo');
+        $option = new Option('v');
+        $option->setVolume(3);
+        $command->add($option);
+
+        $this->parse('foo -vvv')->shouldBeLike($command);
     }
 
 }
