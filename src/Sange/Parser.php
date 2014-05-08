@@ -52,17 +52,19 @@ class Parser {
         {
             $element = $this->convertChunk();
 
-            if ( ! is_null($name = $element->getName()))
+            if (is_null($name = $element->getName()))
             {
-                if (array_key_exists($name, $this->elements))
-                {
-                    $this->elements[$name]->increaseVolume();
-
-                    continue;
-                }
+                $name = $element->getValue();
             }
 
-            $this->elements[] = $element;
+            if (array_key_exists($name, $this->elements))
+            {
+                $this->elements[$name]->increaseVolume();
+            }
+            else
+            {
+                $this->elements[$name] = $element;
+            }
         }
 
         array_map([$command, 'add'], $this->elements);
