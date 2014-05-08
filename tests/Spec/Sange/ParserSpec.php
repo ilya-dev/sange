@@ -17,17 +17,14 @@ class ParserSpec extends ObjectBehavior {
         $command->add(new Argument(null, 'bar'));
         $command->add(new Argument(null, 'baz'));
 
-        //var_dump($this->parse("foo 'bar' 'baz'")->getWrappedObject());exit;
         $this->parse("foo 'bar' 'baz'")->shouldBeLike($command);
 
         $command->add(new Option('text', 'wow'));
         $command->add(new Option('no-backup'));
         $command->add(new Option('f', 'woah'));
 
-        //var_dump(
         $this->parse(" foo  'bar'  'baz' --text  'wow' --no-backup  -f woah ")
              ->shouldBeLike($command);
-        //->getWrappedObject());exit;
 
         $command = new Command('foo');
 
