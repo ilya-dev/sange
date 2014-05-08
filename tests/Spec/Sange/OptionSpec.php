@@ -31,6 +31,10 @@ class OptionSpec extends ObjectBehavior {
         $this->setVolume(3);
 
         $this->getVolume()->shouldBe(3);
+
+        $this->increaseVolume();
+
+        $this->getVolume()->shouldBe(4);
     }
 
 }

@@ -50,5 +50,15 @@ class Option extends InputElement {
         $this->volume = $volume;
     }
 
+    /**
+     * Increase the option volume.
+     *
+     * @return void
+     */
+    public function increaseVolume()
+    {
+        $this->volume += 1;
+    }
+
 }
 
