@@ -24,5 +24,14 @@ class OptionSpec extends ObjectBehavior {
         $this->isShort()->shouldBe(false);
     }
 
+    function it_returns_and_sets_proper_volume()
+    {
+        $this->getVolume()->shouldBe(1);
+
+        $this->setVolume(3);
+
+        $this->getVolume()->shouldBe(3);
+    }
+
 }
 
