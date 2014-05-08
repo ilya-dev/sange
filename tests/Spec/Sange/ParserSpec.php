@@ -22,10 +22,10 @@ class ParserSpec extends ObjectBehavior {
 
         $command->add(new Option('text', 'wow'));
         $command->add(new Option('no-backup'));
-        $command->add(new Option('f'));
+        $command->add(new Option('f', 'woah'));
 
         //var_dump(
-        $this->parse(" foo  'bar'  'baz' --text  'wow' --no-backup  -f ")
+        $this->parse(" foo  'bar'  'baz' --text  'wow' --no-backup  -f woah ")
              ->shouldBeLike($command);
         //->getWrappedObject());exit;
 
