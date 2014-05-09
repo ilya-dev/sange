@@ -24,7 +24,14 @@ class Optimizer {
      */
     protected function optimizeOptions(array $options)
     {
+        $combined = '-';
 
+        foreach ($options as $option)
+        {
+            $combined .= $option->getName();
+        }
+
+        return $combined;
     }
 
 }
