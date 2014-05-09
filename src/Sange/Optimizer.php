@@ -10,6 +10,20 @@ class Optimizer {
      */
     public function optimize(Command $command)
     {
+        return trim(sprintf('%s %s',
+            $command->getName(),
+            $this->optimizeOptions($command->getElements('Option'))
+        ));
+    }
+
+    /**
+     * Optimize options.
+     *
+     * @param array $options
+     * @return string
+     */
+    protected function optimizeOptions(array $options)
+    {
 
     }
 
