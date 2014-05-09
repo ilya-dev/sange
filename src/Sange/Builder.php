@@ -40,10 +40,9 @@ class Builder {
     protected function convertArguments()
     {
         $arguments = $this->command->getElements('Argument');
-
         $arguments = implode(' ', array_map('strval', $arguments));
 
-        return $arguments ? ' '.$arguments : '';
+        return $this->prepareResult($arguments);
     }
 
     /**
@@ -54,10 +53,20 @@ class Builder {
     protected function convertOptions()
     {
         $options = $this->command->getElements('Option');
-
         $options = implode(' ', array_map('strval', $options));
 
-        return $options ? ' '.$options : '';
+        return $this->prepareResult($options);
+    }
+
+    /**
+     * Prepare spacing-aware result string.
+     *
+     * @param string $string
+     * @return string
+     */
+    protected function prepareResult($string)
+    {
+        return $string ? ' '.$string : '';
     }
 
 }
