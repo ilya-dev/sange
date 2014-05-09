@@ -60,5 +60,19 @@ class Option extends InputElement {
         $this->volume += 1;
     }
 
+    /**
+     * Convert the object to a string.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        $name = ($this->isShort() ? '-' : '--').$this->name;
+
+        $value = is_null($this->value) ? '' : escapeshellarg($this->value);
+
+        return trim(sprintf('%s %s', $name, $value));
+    }
+
 }
 
