@@ -55,9 +55,9 @@ class Optimizer {
 
         foreach ($arguments as $argument)
         {
-            if ($this->isSafe($argument))
+            if ($this->isSafe($value = $argument->getValue()))
             {
-                $result .= ' '.$argument->getValue();
+                $result .= ' '.$value;
 
                 continue;
             }
