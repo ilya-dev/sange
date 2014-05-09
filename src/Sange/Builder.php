@@ -55,23 +55,9 @@ class Builder {
     {
         $options = $this->command->getElements('Option');
 
-        $result = [];
+        $options = implode(' ', array_map('strval', $options));
 
-        foreach ($options as $option)
-        {
-            $temporary = $option->isShort() ? '-' : '--';
-
-            $temporary .= $option->getName();
-
-            if ( ! $option->isFlag())
-            {
-                $temporary .= ' '.escapeshellarg($option->getValue());
-            }
-
-            $result[] = $temporary;
-        }
-
-        return $result ? ' '.implode(' ', $result) : '';
+        return $options ? ' '.$options : '';
     }
 
     /**
