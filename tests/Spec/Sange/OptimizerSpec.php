@@ -27,10 +27,21 @@ class OptimizerSpec extends ObjectBehavior {
 
         $command->add(new Argument(null, 'bar'));
         $command->add(new Argument(null, 'baz wow'));
-        $command->add(new Argument(null, 'such'));
+        $command->add(new Argument(null, 'such10'));
         $command->add(new Argument(null, 'v*'));
 
-        $this->optimize($command)->shouldBe('foo bar "baz wow" such "v*"');
+        $this->optimize($command)->shouldBe("foo bar 'baz wow' such10 'v*'");
+    }
+
+    function it_determines_whether_a_string_is_safe()
+    {
+        $this->isSafe('bar')->shouldBe(true);
+
+        $this->isSafe('baz wow')->shouldBe(false);
+
+        $this->isSafe('such10')->shouldBe(true);
+
+        $this->isSafe('v*')->shouldBe(false);
     }
 
 }
