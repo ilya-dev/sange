@@ -28,7 +28,7 @@ class Optimizer {
 
         foreach ($options as $key => $option)
         {
-            if ($option->isShort())
+            if ($option->isShort() and ! $option->getValue())
             {
                 $combined .= $option->getName();
 

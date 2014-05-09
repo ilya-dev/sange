@@ -17,10 +17,11 @@ class OptimizerSpec extends ObjectBehavior {
         $command->add(new Option('a'));
         $command->add(new Option('b'));
         $command->add(new Option('c'));
+        $command->add(new Option('d', '10'));
         $command->add(new Option('bar'));
         $command->add(new Option('baz', 'test'));
 
-        $this->optimize($command)->shouldBe("foo -abc -d 10 --bar --baz 'test'");
+        $this->optimize($command)->shouldBe("foo -abc -d '10' --bar --baz 'test'");
     }
 
 }
