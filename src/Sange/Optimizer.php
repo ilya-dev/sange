@@ -51,7 +51,32 @@ class Optimizer {
      */
     protected function optimizeArguments(array $arguments)
     {
+        $result = '';
 
+        foreach ($arguments as $argument)
+        {
+            if ($this->isSafe($argument))
+            {
+                $result .= ' '.$argument->getValue();
+
+                continue;
+            }
+
+            $result .= ' '.$argument;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Determine whether a string is safe to use without escaping it.
+     *
+     * @param string $string
+     * @return boolean
+     */
+    public function isSafe($string)
+    {
+        return preg_replace('/[^a-z0-9]/i', '', $string) == $string;
     }
 
 }
