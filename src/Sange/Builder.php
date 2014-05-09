@@ -60,15 +60,5 @@ class Builder {
         return $options ? ' '.$options : '';
     }
 
-    /**
-     * Escape the element's value using escapeshellarg.
-     *
-     * @return string
-     */
-    protected function escapeValue(InputElement $element)
-    {
-        return escapeshellarg($element->getValue());
-    }
-
 }
 
