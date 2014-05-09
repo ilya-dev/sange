@@ -41,7 +41,7 @@ class Builder {
     {
         $arguments = $this->command->getElements('Argument');
 
-        $arguments = implode(' ', array_map([$this, 'escapeValue'], $arguments));
+        $arguments = implode(' ', array_map('strval', $arguments));
 
         return $arguments ? ' '.$arguments : '';
     }

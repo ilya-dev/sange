@@ -9,7 +9,7 @@ class Argument extends InputElement {
      */
     public function __toString()
     {
-        return $this->value;
+        return escapeshellarg($this->value);
     }
 
 }
