@@ -10,7 +10,7 @@ class Optimizer {
      */
     public function optimize(Command $command)
     {
-        return trim(sprintf('%s %s%s',
+        return trim(sprintf('%s%s%s',
             $command->getName(),
             $this->optimizeArguments($command->getElements('Argument')),
             $this->optimizeOptions($command->getElements('Option'))
@@ -37,7 +37,7 @@ class Optimizer {
             }
         }
 
-        return sprintf('%s %s',
+        return sprintf(' %s %s',
             $combined ? '-'.$combined : '',
             implode(' ', array_map('strval', $options))
         );
