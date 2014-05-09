@@ -22,6 +22,15 @@ class OptimizerSpec extends ObjectBehavior {
         $command->add(new Option('baz', 'test'));
 
         $this->optimize($command)->shouldBe("foo -abc -d '10' --bar --baz 'test'");
+
+        $command = new Command('foo');
+
+        $command->add(new Argument(null, 'bar'));
+        $command->add(new Argument(null, 'baz wow'));
+        $command->add(new Argument(null, 'such'));
+        $command->add(new Argument(null, 'v*'));
+
+        $this->optimize($command)->shouldBe('foo bar "baz wow" such "v*"');
     }
 
 }
