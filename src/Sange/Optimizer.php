@@ -26,12 +26,17 @@ class Optimizer {
     {
         $combined = '-';
 
-        foreach ($options as $option)
+        foreach ($options as $key => $option)
         {
-            $combined .= $option->getName();
+            if ($option->isShort())
+            {
+                $combined .= $option->getName();
+
+                unset ($options[$key]);
+            }
         }
 
-        return $combined;
+        return $combined.' '.implode(' ', array_map('strval', $options));
     }
 
 }
